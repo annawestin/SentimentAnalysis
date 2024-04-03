@@ -1,4 +1,4 @@
-﻿import pandas as pd
+import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import confusion_matrix
@@ -9,7 +9,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import Pipeline
 
 
-def visualize_data(training_data,test_data):
+def visualize_data(training_data: pd.DataFrame,test_data: pd.DataFrame) -> None:
     """
     Gives out frequency of classes and visualizes it.
     """
@@ -40,7 +40,7 @@ def visualize_data(training_data,test_data):
     plt.show()
     
 
-def create_datasets(filepath):
+def create_datasets(filepath: str) -> pd.DataFrame:
     """
     Creates test and training data
     """
@@ -55,10 +55,12 @@ def create_datasets(filepath):
     print("Training data",len(training_data))
     print("Test data",len(test_data))
     
+    print(type(training_data))
+    
     return training_data,test_data
 
 
-def create_baseline(training_data,test_data):
+def create_baseline(training_data: pd.DataFrame,test_data: pd.DataFrame) -> None:
     """
     Create a baseline (a dummy model) that will guess on the most frequent class.
     Baselines are good to review before training so we know the trained model is better
@@ -99,7 +101,7 @@ def create_baseline(training_data,test_data):
     print(class_report)
     
 
-def Sentiment_analysis(training_data,test_data):
+def Sentiment_analysis(training_data: pd.DataFrame,test_data: pd.DataFrame) -> None:
     """
     Created a sentiment analyser model using Naive Bayes.
     """
@@ -125,7 +127,7 @@ def Sentiment_analysis(training_data,test_data):
     print(class_report)
     
 
-def balance_data(training_data):
+def balance_data(training_data: pd.DataFrame) -> pd.DataFrame:
     """
     Balances out data by using the method undersampling.
     """
@@ -140,4 +142,5 @@ def balance_data(training_data):
         train_balanced = pd.concat([train_balanced, training_data.loc[training_data['score'] == r].sample(min_class_freq)])
 
     train_balanced.head()
+
     return train_balanced
